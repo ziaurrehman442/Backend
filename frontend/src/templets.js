@@ -42,7 +42,7 @@ function Templates(props){
                     </div>
                     <button onClick={props.onSet()} class="btn btn-primary mx-3">SELECT</button>
                 </div>
-            </div>
+            </div> 
         
               )
             })
