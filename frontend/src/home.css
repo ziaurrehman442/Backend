@@ -1,0 +1,60 @@
+.navd{
+    height: 100%;
+    position: fixed;
+    top: 0px;
+}
+.maind{
+    width: 70%;
+    margin-left: 24%;
+}
+body{
+    overflow-x: hidden;
+    background-color: rgb(220, 220, 233);
+}
+.mobnav{
+  position: fixed;
+  top: 2px;
+  width: 100%;
+}
+.n{
+    background-color: blue;
+    color: aliceblue;
+    width: 100%;
+}
+.flex-column{
+    background-color: rgb(83, 83, 85);
+    color: aliceblue;
+    border-radius: 10px;
+    height: 100%;
+    align-items: center;
+}
+.flex-column .nav-link{
+    color: aliceblue;
+}
+.flex-column .navbar-nav{
+    margin-left: 13%;
+}
+.mainm{
+    margin-top: 80px;
+}
+
+.home{
+    background-image: url("./images.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: large;
+    border-radius: 10px;
+}
+
+.Mobile .login-alert{
+    margin-top: 80%;
+}
+
+.cardprice{
+    width: 18rem;
+}
+
+.pn{
+    height: 500px;
+}
