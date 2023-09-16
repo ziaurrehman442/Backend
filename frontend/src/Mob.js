@@ -20,6 +20,10 @@ function Mob(){
     function signout(){
         setid('');
     }
+    
+    function set(e){
+        settid(e);
+    }
     return(
         <div className='Mobile'>
             <BrowserRouter>
@@ -30,7 +34,7 @@ function Mob(){
                     <Routes>
                             <Route path='/' element={ <Home/> }></Route>
                             <Route path='/login' element={ <Login id={id} onSuccess={Success}/> }></Route>
-                            <Route path='/Templates' element={ <Templates/> }></Route>
+                            <Route path='/Templates' element={ <Templates onSet={set}/> }></Route>
                             <Route path='/Price' element={ <Price/> }></Route>
                             <Route path='/CreateCV' element={ <CreateCV/> }></Route>
                             <Route path='/Sign-up' element={ <Signup id={id}/> }></Route>

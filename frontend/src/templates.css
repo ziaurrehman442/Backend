@@ -95,5 +95,8 @@
 }
 .template{
     width: 18rem;
-    margin-top: 5%;
+    margin: 3%;
+}
+.card-group{
+    margin-bottom: 5%;
 }
