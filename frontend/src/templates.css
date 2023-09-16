@@ -94,9 +94,12 @@
     margin-bottom: 0%;
 }
 .template{
-    width: 18rem;
+    max-width: 18rem;
     margin: 3%;
 }
 .card-group{
     margin-bottom: 5%;
+}
+.card-1{
+    max-width: 18rem;
 }
