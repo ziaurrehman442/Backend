@@ -39,7 +39,7 @@ function Template1(){
                         </div>
                         <div>
                             <div className="contact-h">
-                                <b>adress</b>
+                                <b>address</b>
                             </div>
                             <p className="contact">ABC any where</p>
                         </div>

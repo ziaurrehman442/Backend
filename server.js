@@ -54,7 +54,7 @@ app.post('/create/:name', (req,res) => {
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'frontend/src/uploads'); // Directory where images will be saved
+      cb(null, 'frontend/public/uploads'); // Directory where images will be saved
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname);
@@ -64,7 +64,7 @@ const storage = multer.diskStorage({
   const upload = multer({ storage });
   
   app.post('/upload', upload.single('image'), (req, res) => {
-    res.send('Image uploaded successfully');
+    return res(req);
   });
 
 
