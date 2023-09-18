@@ -50,21 +50,31 @@ app.post('/create/:name', (req,res) => {
 })
 
 
+function randomStr(len) {
+  let ans = '';
+  let arr = "12345678910ABCDEFGHIJKLMNOPQRATUVWXYZabcdefghijklmnopqrstuvwxyz"
+  for (let i = len; i > 0; i--) {
+      ans +=
+          arr[(Math.floor(Math.random() * arr.length))];
+  }
+  return ans;
+}
 
-
+var name = '';
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
+      name = randomStr(20)+file.originalname;
       cb(null, 'frontend/public/uploads'); // Directory where images will be saved
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname);
+      cb(null, name);
     },
   });
   
   const upload = multer({ storage });
   
   app.post('/upload', upload.single('image'), (req, res) => {
-    return res(req);
+     return res;
   });
 
 

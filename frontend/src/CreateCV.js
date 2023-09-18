@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import LoadingSpinner from './loading';
 
 
@@ -20,7 +19,9 @@ const CreateCV = () => {
   };
 
   
-  function handlelogin(event) {
+ 
+
+  const handleUpload = () =>{
     const formData = new FormData();
     formData.append('image', file);
     formData.append('title',title);
@@ -30,49 +31,17 @@ const CreateCV = () => {
     formData.append("phone",phone);
     formData.append("address",address);
     formData.append("intro",intoduction);
-    setloading(true);
-    event.preventDefault();
-    axios.get('http://192.168.0.104:8081/upload',formData,{
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-        .then(res => {
-                if(0){
-                  console.log(res);
-                }
-                else{
-                    console.log(res)
-                }
-    })
-    .catch(err =>{
-        alert(err);
-        setloading(false);
-    })
-  }
-
-  const handleUpload = () => {
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('title',title);
-    formData.append("fname",fname);
-    formData.append("lname",lname);
-    formData.append("email",email);
-    formData.append("phone",phone);
-    formData.append("address",address);
-    formData.append("intro",intoduction);
-      axios.post('http://192.168.0.104:8081/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }).then(res => {
-        console.log(JSON.stringify(res.formData));
-
-      }
-      )
-      .catch (err => {
-      prompt('Error uploading image:', err);
-    })
+      const response = fetch('http://192.168.0.104:8081/upload', {
+        method: 'post',
+        body: formData,
+      });
+      if (response.ok) {
+        console.log('Image uploaded successfully');
+        // Handle success here (e.g., show a success message)
+      } else {
+        console.error('Image upload failed');
+        // Handle error here (e.g., show an error message)
+      } 
   };
   return (
     <div className='container m-5'>
@@ -81,7 +50,7 @@ const CreateCV = () => {
                 
                 <LoadingSpinner/>
             }
-              <form onSubmit={ handlelogin }>
+              <form onSubmit={ handleUpload }>
               <div className="mb-3 form-group">
                     <label htmlFor="file" className="form-label">Select Your Picture</label>
                     <input type="file" required disabled={loading} onChange={handleFileChange} className="form-control" name="file" id="file" aria-describedby="emailHelp"/>

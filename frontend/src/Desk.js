@@ -14,6 +14,7 @@ import Dashboard from './Dashboard';
 function Desk(){
     const [id,setid] = useState('');
     const [tid,settid] = useState('');
+    const [file, setFile] = useState(null);
     function Success(element){
         setid(element);
     }
@@ -23,6 +24,10 @@ function Desk(){
     function set(e){
         settid(e);
     }
+    const handleFileChange = (e) => {
+        setFile(e);
+        console.log(file);
+      };
     return(
         <div className='Desktop'>
             <BrowserRouter>
@@ -36,7 +41,7 @@ function Desk(){
                             <Route path='/login' element={ <Login id={id} onSuccess={Success}/> }></Route>
                             <Route path='/Templates' element={ <Templates onSet={set}/> }></Route>
                             <Route path='/Price' element={ <Price/> }></Route>
-                            <Route path='/CreateCV' element={ <CreateCV/> }></Route>
+                            <Route path='/CreateCV' element={ <CreateCV sub={handleFileChange}/> }></Route>
                             <Route path='/Sign-up' element={ <Signup id={id}/> }></Route>
                             <Route path='/Dashboard' element={ <Dashboard id={id} />}></Route>
                         </Routes>
