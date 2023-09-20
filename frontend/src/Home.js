@@ -4,8 +4,8 @@ import "./home.css";
 
 function Home(){
     return(
-        <div className="container home" id="pdf">
-            <h1 className="my-5" align='center'>Welcome to CV MAKER!</h1>
+        <div className="container-fluid home" id="pdf">
+            <h1 className="mb-5" align='center'>Welcome to CV MAKER!</h1>
             <p>
                 We're thrilled to extend a warm welcome to you. Whether you're a new member of our community, a returning visitor, or just passing through, we want you to know that you're an important part of what makes this place special.
             </p>

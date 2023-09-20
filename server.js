@@ -62,23 +62,44 @@ function randomStr(len) {
 
 var name = '';
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      name = randomStr(20)+file.originalname;
-      cb(null, 'frontend/public/uploads'); // Directory where images will be saved
-    },
-    filename: function (req, file, cb) {
-      cb(null, name);
-    },
-  });
-  
-  const upload = multer({ storage });
-  
-  app.post('/upload', upload.single('image'), (req, res) => {
-     return res;
-  });
+  destination: function (req, file, cb) {
+    cb(null, './frontend/public/uploads'); // Define the folder where uploaded files will be stored
+  },
+  filename: function (req, file, cb) {
+    name = randomStr(10)+file.originalname;
+    cb(null, name); // Use the original file name for storage
+  },
+});
 
+const upload = multer({ storage: storage });
 
-  
+app.use(express.static('public')); // Serve static files, including uploaded files
+app.use('/uploads', express.static('uploads'));
+
+app.post('/upload', upload.single('file'), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+  }
+  try {
+    const sql = "INSERT INTO `user_data`(`id`, `Email`, `Phone`, `address`, `Image`, `introduction`, `title`, `fname`, `lname`) VALUES (?)";
+    const data = {
+      id: req.body.id,
+      Email: req.body.Email,
+      Phone: req.body.Phone,
+      address: req.body.address,
+      Image: req.body.name,
+      introduction: req.body.introduction,
+      title: req.body.title,
+      fname: req.body.fname,
+      lname: req.body.lname,
+    }
+    db.query(sql,[data], (err, resp) => {
+        if (err) return res.json(err);
+        return res.json(resp);
+    })
+  }
+
+});
 
 app.listen(8081, () => {
     console.log("listening!");

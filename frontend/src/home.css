@@ -12,8 +12,8 @@ body{
     background-color: rgb(220, 220, 233);
 }
 .mobnav{
-  position: fixed;
-  top: 2px;
+  position: relative;
+  top: 0%;
   width: 100%;
 }
 .n{
@@ -35,7 +35,7 @@ body{
     margin-left: 13%;
 }
 .mainm{
-    margin-top: 80px;
+    margin-top: 0px;
 }
 
 .home{
@@ -45,8 +45,12 @@ body{
     background-size: cover;
     font-size: large;
     border-radius: 10px;
+    height: 100%;
 }
 
+.mainm{
+    height: 100%;
+}
 .Mobile .login-alert{
     margin-top: 80%;
 }

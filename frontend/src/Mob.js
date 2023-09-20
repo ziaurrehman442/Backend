@@ -14,16 +14,13 @@ import Dashboard from './Dashboard';
 function Mob(){
     const [tid,settid] = useState('');
     const [id,setid] = useState('');
-    const [file, setFile] = useState(null);
     function Success(element){
         setid(element);
     }
     function signout(){
         setid('');
     }
-    const handleFileChange = (e) => {
-        setFile(e);
-      };
+
     
     function set(e){
         settid(e);
@@ -40,7 +37,7 @@ function Mob(){
                             <Route path='/login' element={ <Login id={id} onSuccess={Success}/> }></Route>
                             <Route path='/Templates' element={ <Templates onSet={set}/> }></Route>
                             <Route path='/Price' element={ <Price/> }></Route>
-                            <Route path='/CreateCV' element={ <CreateCV sub={handleFileChange}/> }></Route>
+                            <Route path='/CreateCV' element={ <CreateCV /> }></Route>
                             <Route path='/Sign-up' element={ <Signup id={id}/> }></Route>
                             <Route path='/Dashboard' element={ <Dashboard id={id} />}></Route>
                     </Routes>
