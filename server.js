@@ -77,29 +77,54 @@ app.use(express.static('public')); // Serve static files, including uploaded fil
 app.use('/uploads', express.static('uploads'));
 
 app.post('/upload', upload.single('file'), async (req, res) => {
+  
   if (!req.file) {
-    return res.status(400).send('No file uploaded.');
+    return (res.status(400).send('No file uploaded.'));
   }
-  try {
-    const sql = "INSERT INTO `user_data`(`id`, `Email`, `Phone`, `address`, `Image`, `introduction`, `title`, `fname`, `lname`) VALUES (?)";
-    const data = {
-      id: req.body.id,
-      Email: req.body.Email,
-      Phone: req.body.Phone,
-      address: req.body.address,
-      Image: req.body.name,
-      introduction: req.body.introduction,
-      title: req.body.title,
-      fname: req.body.fname,
-      lname: req.body.lname,
-    }
-    db.query(sql,[data], (err, resp) => {
-        if (err) return res.json(err);
-        return res.json(resp);
-    })
+  else{
+    return(res.status(200).send('file uploaded successfully.'));
   }
-
 });
+
+
+function randnum() {
+  let ans = '';
+  let arr = "0987654321"
+  for (let i = 10; i > 0; i--) {
+      ans +=
+          arr[(Math.floor(Math.random() * arr.length))];
+  }
+  return ans;
+}
+
+
+app.post('/createcvd/:data',(req,res) => {
+  const sql ="INSERT INTO `user_data`(`id`, `Email`, `Phone`, `address`, `Image`, `introduction`, `title`, `fname`, `lname`) VALUES (?)";
+    const array = JSON.parse(req.params.data);
+    const address = array.data.address;
+    const value =  [
+        array.data.id,
+        array.data.Email,
+        array.data.Phone,
+        address,
+        name,
+        array.data.introduction,
+        array.data.title,
+        array.data.fname,
+        array.data.lname
+    ];
+
+    db.query(sql, [value] ,(err) => {
+        if (err){ return res.json(err);}
+        else{
+          const sql = "SELECT `U_id` FROM `user_data` WHERE image = ?";
+          db.query(sql, [name] ,(err,data) => {
+            if (err){ return res.json(err);}
+            return res.json(data);
+          })
+        }
+    })
+})
 
 app.listen(8081, () => {
     console.log("listening!");
