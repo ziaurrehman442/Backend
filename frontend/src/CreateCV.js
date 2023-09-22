@@ -86,7 +86,7 @@ function CreateCV(props) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="Phone" className="form-label">Phone</label>
-                    <input type="Phone" required disabled={loading} placeholder='+923141234567' onChange={e => {setphone(e.target.value); }} className="form-control" name="Phone" id="Phone" aria-describedby="PhoneHelp"/>
+                    <input type="tel" required disabled={loading} placeholder='+923141234567' onChange={e => {setphone(e.target.value); }} className="form-control" name="Phone" id="Phone" aria-describedby="PhoneHelp"/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="address" className="form-label">Address</label>

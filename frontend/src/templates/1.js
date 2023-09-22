@@ -19,6 +19,7 @@ function Template1(){
       }
     return(
         <div className="container m-3">
+            <button className="btn btn-primary my-3" onClick={printDocument}>Download</button>
             <div id="pdf" className="row trow">
                 <div className="col-sm-3">
                     <img className="image-t" alt="CV" src="uploads/images.jpeg"/>
@@ -151,7 +152,6 @@ function Template1(){
                     </div>
                 </div>
             </div>
-            <button onClick={printDocument}>print</button>
         </div>
     )
 }

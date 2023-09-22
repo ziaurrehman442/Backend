@@ -10,6 +10,11 @@ import { useState } from 'react';
 import Signup from './signup';
 import Dashboard from './Dashboard';
 import Eduction from './educationForm';
+import Experiance from './experiance';
+import Skills from './skills';
+import Languages from './Languages';
+import Referance from './Referance';
+import Template1 from './templates/1';
 
 
 function Desk(){
@@ -44,6 +49,11 @@ function Desk(){
                             <Route path='/Price' element={ <Price/> }></Route>
                             <Route path='/CreateCV' element={ <CreateCV id={id}  onset={seta}/> }></Route>
                             <Route path='/Education' element={ <Eduction id={U_id}/> }></Route>
+                            <Route path='/Experiance' element={ <Experiance id={U_id}/> }></Route>
+                            <Route path='/Skills' element={ <Skills id={U_id}/> }></Route>
+                            <Route path='/Languages' element={ <Languages id={U_id}/> }></Route>
+                            <Route path='/Referance' element={ <Referance id={U_id} tid={tid}/> }></Route>
+                            <Route path='/1' element={ <Template1 id={U_id}/> }></Route>
                             <Route path='/Sign-up' element={ <Signup id={id}/> }></Route>
                             <Route path='/Dashboard' element={ <Dashboard id={id} />}></Route>
                         </Routes>

@@ -3,19 +3,16 @@ import { set } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Eduction(props){
+function Skills(props){
     const navigate = useNavigate("");
     const id = (props.id[0]['U_id']);
     const [title,settitle] = useState('');
-    const [passyear,setpassyear] = useState('');
-    const [Institute,setinstitute] = useState('');
-    const institute1 = Institute.replaceAll('/', '@');
+    const [Level,setLevel] = useState('');
     
     const data = {
         'id':id,
         "title":title,
-        "passyear": passyear,
-        "Institute": institute1
+        "Level": Level,
     }
     const [data1,setdata1] = useState('');
     eduseen();
@@ -27,9 +24,8 @@ function Eduction(props){
     <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Title</th>
+      <th scope="col">Level</th>
     </tr>
     </thead>
     <tbody>{
@@ -39,23 +35,22 @@ function Eduction(props){
                     <tr>
                         <th scope="row">{key}</th>
                         <td>{element.title}</td>
-                        <td>{element.institute}</td>
-                        <td>{element.year}</td>
+                        <td>{element.level}</td>
                     </tr>
                 )
             })
     }
     </tbody>
     </table> 
-    <button className="btn btn-primary" onClick={()=>{navigate("/Skills")}}>Submit</button>
+    <button className="btn btn-primary" onClick={()=>{navigate("/Languages")}}>Submit</button>
   </div>  )
         }
         else{
-            return("You have no added education!");
+            return("You have no added skill!");
         }
     }
     function eduseen(){
-        axios.post("http://192.168.0.104:8081/getedu/"+id)
+        axios.post("http://192.168.0.104:8081/getskill/"+id)
         .then(res => {
             if (res.status===200){
                 setdata1(res.data); 
@@ -66,8 +61,8 @@ function Eduction(props){
           console.log(err);
         })
     }
-    function handleeducation(){
-        axios.post("http://192.168.0.104:8081/addedu/"+JSON.stringify(data))
+    function handleskill(){
+        axios.post("http://192.168.0.104:8081/addskill/"+JSON.stringify(data))
         .then(res => {
             if (res.status===200){
               console.log(res);
@@ -81,21 +76,29 @@ function Eduction(props){
 
     return(
         <div>
-            <h1>Add Your Education!</h1>
-            <label htmlFor="title" className="form-lable">Degree</label>
+            <h1>Add Your Skills!</h1>
+            <label htmlFor="title" className="form-lable">Name</label>
             <input id="title" className="form-control" value={title} onChange={(e)=>{settitle(e.target.value)}}/>
-            <label htmlFor="title" className="form-lable">Passing Year</label>
-            <input id="title" className="form-control" value={passyear} onChange={(e)=>{setpassyear(e.target.value)}}/>
-            <label htmlFor="title" className="form-lable">Institute name</label>
-            <input id="institute" className="form-control" value={Institute} onChange={(e)=>{setinstitute(e.target.value)}}/>
-            <button onClick={handleeducation}>Add</button>
+            <p>Choose Level from List:</p>
+            <input type="radio" id="1" name="level" value="1" onChange={(e)=>{setLevel(e.target.value)}}/>
+            <label for="1">Level 1</label><br/>
+            <input type="radio" id="2" name="level" value="2" onChange={(e)=>{setLevel(e.target.value)}}/>
+            <label for="2">Level 2</label><br/>
+            <input type="radio" id="3" name="level" value="3" onChange={(e)=>{setLevel(e.target.value)}}/>
+            <label for="3">Level 3</label><br/>
+            <input type="radio" id="4" name="level" value="4" onChange={(e)=>{setLevel(e.target.value)}}/>
+            <label for="4">Level 4</label><br/>
+            <input type="radio" id="5" name="level" value="5" onChange={(e)=>{setLevel(e.target.value)}}/>
+            <label for="5">Level 5</label><br/>
+            
+            <button onClick={handleskill} className="btn btn-primary my-3">Add</button>  
 
-            <div className="my-5">
-                <h1>Your Added Education:</h1>
+            <div className="my-3">
+                <h1>Your Added Skills:</h1>
                 <Rend/>
             </div>
         </div>
     )
 }
 
-export default Eduction;
+export default Skills;

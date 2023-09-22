@@ -3,19 +3,14 @@ import { set } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Eduction(props){
+function Languages(props){
     const navigate = useNavigate("");
     const id = (props.id[0]['U_id']);
     const [title,settitle] = useState('');
-    const [passyear,setpassyear] = useState('');
-    const [Institute,setinstitute] = useState('');
-    const institute1 = Institute.replaceAll('/', '@');
     
     const data = {
         'id':id,
-        "title":title,
-        "passyear": passyear,
-        "Institute": institute1
+        "title":title
     }
     const [data1,setdata1] = useState('');
     eduseen();
@@ -27,9 +22,7 @@ function Eduction(props){
     <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Title</th>
     </tr>
     </thead>
     <tbody>{
@@ -39,23 +32,21 @@ function Eduction(props){
                     <tr>
                         <th scope="row">{key}</th>
                         <td>{element.title}</td>
-                        <td>{element.institute}</td>
-                        <td>{element.year}</td>
                     </tr>
                 )
             })
     }
     </tbody>
     </table> 
-    <button className="btn btn-primary" onClick={()=>{navigate("/Skills")}}>Submit</button>
+    <button className="btn btn-primary" onClick={()=>{navigate("/Experiance")}}>Submit</button>
   </div>  )
         }
         else{
-            return("You have no added education!");
+            return("You have no added skill!");
         }
     }
     function eduseen(){
-        axios.post("http://192.168.0.104:8081/getedu/"+id)
+        axios.post("http://192.168.0.104:8081/getlanguage/"+id)
         .then(res => {
             if (res.status===200){
                 setdata1(res.data); 
@@ -66,8 +57,8 @@ function Eduction(props){
           console.log(err);
         })
     }
-    function handleeducation(){
-        axios.post("http://192.168.0.104:8081/addedu/"+JSON.stringify(data))
+    function handleskill(){
+        axios.post("http://192.168.0.104:8081/addlanguage/"+JSON.stringify(data))
         .then(res => {
             if (res.status===200){
               console.log(res);
@@ -81,21 +72,18 @@ function Eduction(props){
 
     return(
         <div>
-            <h1>Add Your Education!</h1>
-            <label htmlFor="title" className="form-lable">Degree</label>
+            <h1>Add Your Skills!</h1>
+            <label htmlFor="title" className="form-lable">Language Name</label>
             <input id="title" className="form-control" value={title} onChange={(e)=>{settitle(e.target.value)}}/>
-            <label htmlFor="title" className="form-lable">Passing Year</label>
-            <input id="title" className="form-control" value={passyear} onChange={(e)=>{setpassyear(e.target.value)}}/>
-            <label htmlFor="title" className="form-lable">Institute name</label>
-            <input id="institute" className="form-control" value={Institute} onChange={(e)=>{setinstitute(e.target.value)}}/>
-            <button onClick={handleeducation}>Add</button>
+            
+            <button onClick={handleskill} className="btn btn-primary my-3">Add</button>  
 
-            <div className="my-5">
-                <h1>Your Added Education:</h1>
+            <div className="my-3">
+                <h1>Your Added Skills:</h1>
                 <Rend/>
             </div>
         </div>
     )
 }
 
-export default Eduction;
+export default Languages;
